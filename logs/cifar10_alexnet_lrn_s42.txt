@@ -1,0 +1,86 @@
+========================================================================================
+ELEC 475: Lab 2 Training Engine
+Device        : cuda (NVIDIA GeForce RTX 3050 Laptop GPU)
+Model         : ALEXNET (Norm: LRN)
+Dataset       : CIFAR10 (Augmentation: False)
+Hyperparams   : Epochs=10, BatchSize=128, LR=0.001, Seed=42
+Early Stopping: Disabled
+========================================================================================
+
+Initializing DataLoaders...
+Train batches: 390 (50000 samples), Val batches: 79, Classes: 10
+============================================================
+Computational Complexity Profile: ALEXNET (lrn)
+Input Tensor Shape   : (1, 3, 64, 64)
+Counting Method      : THOP (FLOPs = 2 x reported MACs; some operators are uncounted)
+------------------------------------------------------------
+Total Parameters     : 6,608,842 (6.6088 M)
+Trainable Parameters : 6,608,842
+Multiply-Accumulates : 218,347,520 (218.35 MMACs)
+Floating Point Ops   : 436,695,040 (436.70 MFLOPs)
+Weight Size (FP32)   : 25.21 MB
+============================================================
+
+Detailed Layer Specification:
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+AlexNet64                                [1, 10]                   --
+├─Sequential: 1-1                        [1, 256, 3, 3]            --
+│    └─Conv2d: 2-1                       [1, 64, 32, 32]           4,864
+│    └─ReLU: 2-2                         [1, 64, 32, 32]           --
+│    └─LocalResponseNorm: 2-3            [1, 64, 32, 32]           --
+│    └─MaxPool2d: 2-4                    [1, 64, 15, 15]           --
+│    └─Conv2d: 2-5                       [1, 192, 15, 15]          307,392
+│    └─ReLU: 2-6                         [1, 192, 15, 15]          --
+│    └─LocalResponseNorm: 2-7            [1, 192, 15, 15]          --
+│    └─MaxPool2d: 2-8                    [1, 192, 7, 7]            --
+│    └─Conv2d: 2-9                       [1, 384, 7, 7]            663,936
+│    └─ReLU: 2-10                        [1, 384, 7, 7]            --
+│    └─Conv2d: 2-11                      [1, 384, 7, 7]            1,327,488
+│    └─ReLU: 2-12                        [1, 384, 7, 7]            --
+│    └─Conv2d: 2-13                      [1, 256, 7, 7]            884,992
+│    └─ReLU: 2-14                        [1, 256, 7, 7]            --
+│    └─MaxPool2d: 2-15                   [1, 256, 3, 3]            --
+├─Sequential: 1-2                        [1, 10]                   --
+│    └─Dropout: 2-16                     [1, 2304]                 --
+│    └─Linear: 2-17                      [1, 1024]                 2,360,320
+│    └─ReLU: 2-18                        [1, 1024]                 --
+│    └─Dropout: 2-19                     [1, 1024]                 --
+│    └─Linear: 2-20                      [1, 1024]                 1,049,600
+│    └─ReLU: 2-21                        [1, 1024]                 --
+│    └─Linear: 2-22                      [1, 10]                   10,250
+==========================================================================================
+Total params: 6,608,842
+Trainable params: 6,608,842
+Non-trainable params: 0
+Total mult-adds (Units.MEGABYTES): 218.51
+==========================================================================================
+Input size (MB): 0.05
+Forward/backward pass size (MB): 1.29
+Params size (MB): 26.44
+Estimated Total Size (MB): 27.77
+==========================================================================================
+
+==============================================================================================
+ Epoch  | Train Loss  | Train Acc (%)  |  Val Loss  | Val Acc (%)  | Val F1 (%)  | Time (s)  | Throughput
+----------------------------------------------------------------------------------------------
+   1    |   1.7173    |     33.61      |   1.3876   |    47.94     |    46.69    |   35.09   |  1422.8  s/s
+   2    |   1.3184    |     52.11      |   1.1507   |    59.00     |    58.19    |   31.60   |  1579.9  s/s
+   3    |   1.1348    |     59.79      |   1.0401   |    63.07     |    63.29    |   31.28   |  1596.1  s/s
+   4    |   1.0034    |     64.73      |   0.9801   |    65.88     |    65.83    |   31.95   |  1562.4  s/s
+   5    |   0.9005    |     68.76      |   0.9121   |    69.13     |    69.05    |   32.35   |  1543.3  s/s
+   6    |   0.8248    |     71.82      |   0.8397   |    71.28     |    70.94    |   32.60   |  1531.2  s/s
+   7    |   0.7386    |     74.57      |   0.8401   |    71.53     |    71.56    |   32.40   |  1540.6  s/s
+   8    |   0.6881    |     76.44      |   0.8394   |    71.44     |    70.72    |   32.21   |  1549.6  s/s
+   9    |   0.6370    |     78.21      |   0.7608   |    74.72     |    74.69    |   32.35   |  1542.9  s/s
+  10    |   0.5846    |     79.99      |   0.7903   |    73.53     |    73.12    |   32.42   |  1539.6  s/s
+Final clean-train accuracy: 81.91% | Final validation: 73.53%
+Generalization gap (clean training - validation): 8.38 percentage points
+Results and per-epoch history saved to: results/cifar10_alexnet_lrn_s42.json
+==============================================================================================
+Training completed in 324.58s.
+Best Val Accuracy: 74.72% | Best Val Macro F1: 74.69%
+Model Complexity : 6.609M Parameters | 436.70M FLOPs
+Best model weights saved to: checkpoints/cifar10_alexnet_lrn_s42.pth
+Training curves successfully saved to: plots/cifar10_alexnet_lrn_s42.png

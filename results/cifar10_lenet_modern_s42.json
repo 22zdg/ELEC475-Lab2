@@ -1,0 +1,119 @@
+{
+  "complete": true,
+  "config": {
+    "model": "lenet_modern",
+    "norm": "none",
+    "pretrained": false,
+    "dataset": "cifar10",
+    "data_dir": "/home/zac/elec475/lab2/data",
+    "epochs": 5,
+    "batch_size": 128,
+    "lr": 0.001,
+    "seed": 42,
+    "no_augment": true,
+    "save_model": "checkpoints/cifar10_lenet_modern_s42.pth",
+    "plot_file": "plots/cifar10_lenet_modern_s42.png",
+    "results_file": "results/cifar10_lenet_modern_s42.json",
+    "experiment": "lenet_modern",
+    "workers": 2,
+    "device": "cuda",
+    "early_stopping": false,
+    "early_stopping_metric": "val_loss",
+    "patience": 5,
+    "min_delta": 0.0001
+  },
+  "environment": {
+    "python": "3.14.7",
+    "torch": "2.14.1+cu130",
+    "device": "cuda",
+    "device_name": "NVIDIA GeForce RTX 3050 Laptop GPU"
+  },
+  "num_classes": 10,
+  "train_samples": 50000,
+  "validation_samples": 10000,
+  "profile": {
+    "total_params": 446006,
+    "trainable_params": 446006,
+    "params_m": 0.446006,
+    "macs": 4592520,
+    "macs_m": 4.59252,
+    "flops": 9185040,
+    "flops_m": 9.18504,
+    "size_mb": 1.7013778686523438,
+    "backend": "THOP (FLOPs = 2 x reported MACs; some operators are uncounted)"
+  },
+  "validation_split": "official CIFAR-10 test split used as validation (course template)",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.5381826792007838,
+      "train_accuracy": 44.85376602564103,
+      "val_loss": 1.284158201599121,
+      "val_accuracy": 53.90999913215637,
+      "val_macro_f1": 53.721439838409424,
+      "epoch_seconds": 13.690708698999515
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.1942248691350985,
+      "train_accuracy": 57.59014423076923,
+      "val_loss": 1.1112712051391602,
+      "val_accuracy": 60.86999773979187,
+      "val_macro_f1": 60.62279939651489,
+      "epoch_seconds": 10.511125469001854
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.0355278875583258,
+      "train_accuracy": 63.28926282051282,
+      "val_loss": 1.020533299922943,
+      "val_accuracy": 63.85999917984009,
+      "val_macro_f1": 63.51248025894165,
+      "epoch_seconds": 10.056402950998745
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.9319318496263944,
+      "train_accuracy": 66.99719551282051,
+      "val_loss": 1.020831701850891,
+      "val_accuracy": 63.919997215270996,
+      "val_macro_f1": 63.76524567604065,
+      "epoch_seconds": 9.949375506999786
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.8552110459560003,
+      "train_accuracy": 69.96594551282051,
+      "val_loss": 0.9528849193572998,
+      "val_accuracy": 66.93000197410583,
+      "val_macro_f1": 66.94350242614746,
+      "epoch_seconds": 10.627629566002724
+    }
+  ],
+  "final": {
+    "epoch": 5,
+    "train_loss": 0.8552110459560003,
+    "train_accuracy": 69.96594551282051,
+    "val_loss": 0.9528849193572998,
+    "val_accuracy": 66.93000197410583,
+    "val_macro_f1": 66.94350242614746,
+    "epoch_seconds": 10.627629566002724,
+    "clean_train_loss": 0.7365503611373901,
+    "clean_train_accuracy": 74.53799843788147,
+    "clean_train_macro_f1": 74.55007433891296,
+    "generalization_gap_pp": 7.607996463775635,
+    "online_generalization_gap_pp": 3.035943538714676
+  },
+  "best_accuracy_epoch": {
+    "epoch": 5,
+    "train_loss": 0.8552110459560003,
+    "train_accuracy": 69.96594551282051,
+    "val_loss": 0.9528849193572998,
+    "val_accuracy": 66.93000197410583,
+    "val_macro_f1": 66.94350242614746,
+    "epoch_seconds": 10.627629566002724
+  },
+  "mean_epoch_seconds": 10.967048438400525,
+  "epoch_timing_scope": "training plus validation; excludes final clean-train evaluation",
+  "training_wall_seconds": 54.87088679799854
+}

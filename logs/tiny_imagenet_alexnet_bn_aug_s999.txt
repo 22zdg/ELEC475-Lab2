@@ -1,0 +1,94 @@
+========================================================================================
+ELEC 475: Lab 2 Training Engine
+Device        : cuda (NVIDIA GeForce RTX 3050 Laptop GPU)
+Model         : ALEXNET (Norm: BN)
+Dataset       : TINY_IMAGENET (Augmentation: True)
+Hyperparams   : Epochs=15, BatchSize=128, LR=0.001, Seed=999
+Early Stopping: Disabled
+========================================================================================
+
+Initializing DataLoaders...
+Train batches: 781 (100000 samples), Val batches: 79, Classes: 200
+============================================================
+Computational Complexity Profile: ALEXNET (bn)
+Input Tensor Shape   : (1, 3, 64, 64)
+Counting Method      : THOP (FLOPs = 2 x reported MACs; some operators are uncounted)
+------------------------------------------------------------
+Total Parameters     : 6,806,152 (6.8062 M)
+Trainable Parameters : 6,806,152
+Multiply-Accumulates : 219,177,728 (219.18 MMACs)
+Floating Point Ops   : 438,355,456 (438.36 MFLOPs)
+Weight Size (FP32)   : 25.96 MB
+============================================================
+
+Detailed Layer Specification:
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+AlexNet64                                [1, 200]                  --
+├─Sequential: 1-1                        [1, 256, 3, 3]            --
+│    └─Conv2d: 2-1                       [1, 64, 32, 32]           4,864
+│    └─BatchNorm2d: 2-2                  [1, 64, 32, 32]           128
+│    └─ReLU: 2-3                         [1, 64, 32, 32]           --
+│    └─MaxPool2d: 2-4                    [1, 64, 15, 15]           --
+│    └─Conv2d: 2-5                       [1, 192, 15, 15]          307,392
+│    └─BatchNorm2d: 2-6                  [1, 192, 15, 15]          384
+│    └─ReLU: 2-7                         [1, 192, 15, 15]          --
+│    └─MaxPool2d: 2-8                    [1, 192, 7, 7]            --
+│    └─Conv2d: 2-9                       [1, 384, 7, 7]            663,936
+│    └─BatchNorm2d: 2-10                 [1, 384, 7, 7]            768
+│    └─ReLU: 2-11                        [1, 384, 7, 7]            --
+│    └─Conv2d: 2-12                      [1, 384, 7, 7]            1,327,488
+│    └─BatchNorm2d: 2-13                 [1, 384, 7, 7]            768
+│    └─ReLU: 2-14                        [1, 384, 7, 7]            --
+│    └─Conv2d: 2-15                      [1, 256, 7, 7]            884,992
+│    └─BatchNorm2d: 2-16                 [1, 256, 7, 7]            512
+│    └─ReLU: 2-17                        [1, 256, 7, 7]            --
+│    └─MaxPool2d: 2-18                   [1, 256, 3, 3]            --
+├─Sequential: 1-2                        [1, 200]                  --
+│    └─Dropout: 2-19                     [1, 2304]                 --
+│    └─Linear: 2-20                      [1, 1024]                 2,360,320
+│    └─ReLU: 2-21                        [1, 1024]                 --
+│    └─Dropout: 2-22                     [1, 1024]                 --
+│    └─Linear: 2-23                      [1, 1024]                 1,049,600
+│    └─ReLU: 2-24                        [1, 1024]                 --
+│    └─Linear: 2-25                      [1, 200]                  205,000
+==========================================================================================
+Total params: 6,806,152
+Trainable params: 6,806,152
+Non-trainable params: 0
+Total mult-adds (Units.MEGABYTES): 218.71
+==========================================================================================
+Input size (MB): 0.05
+Forward/backward pass size (MB): 2.56
+Params size (MB): 27.22
+Estimated Total Size (MB): 29.83
+==========================================================================================
+
+==============================================================================================
+ Epoch  | Train Loss  | Train Acc (%)  |  Val Loss  | Val Acc (%)  | Val F1 (%)  | Time (s)  | Throughput
+----------------------------------------------------------------------------------------------
+   1    |   4.8504    |      3.22      |   4.5219   |     6.23     |    3.50     |   61.91   |  1614.7  s/s
+   2    |   4.3533    |      7.59      |   4.2083   |     9.39     |    6.79     |   58.12   |  1720.0  s/s
+   3    |   4.0826    |     11.03      |   3.8339   |    14.28     |    10.59    |   58.50   |  1709.0  s/s
+   4    |   3.8731    |     14.17      |   3.7631   |    15.56     |    12.85    |   58.56   |  1707.1  s/s
+   5    |   3.7011    |     16.71      |   3.7083   |    17.02     |    14.67    |   58.52   |  1708.3  s/s
+   6    |   3.5644    |     19.25      |   3.3747   |    22.04     |    19.52    |   57.90   |  1726.6  s/s
+   7    |   3.4373    |     21.27      |   3.3307   |    24.23     |    21.84    |   57.19   |  1748.1  s/s
+   8    |   3.3286    |     23.55      |   3.3363   |    24.42     |    22.62    |   57.84   |  1728.5  s/s
+   9    |   3.2309    |     25.28      |   3.1448   |    27.37     |    24.49    |   58.45   |  1710.4  s/s
+  10    |   3.1330    |     26.91      |   3.0293   |    29.81     |    27.86    |   57.77   |  1730.4  s/s
+  11    |   3.0586    |     28.45      |   2.9494   |    30.62     |    28.84    |   58.94   |  1696.1  s/s
+  12    |   2.9905    |     29.82      |   2.8951   |    32.33     |    31.02    |   57.64   |  1734.3  s/s
+  13    |   2.9225    |     30.84      |   2.9429   |    31.42     |    30.37    |   56.48   |  1770.1  s/s
+  14    |   2.8689    |     31.95      |   2.8710   |    33.07     |    31.75    |   58.15   |  1719.2  s/s
+  15    |   2.8212    |     33.04      |   2.9520   |    31.63     |    30.25    |   54.25   |  1842.6  s/s
+Final clean-train accuracy: 36.25% | Final validation: 31.63%
+Generalization gap (clean training - validation): 4.62 percentage points
+Results and per-epoch history saved to: results/tiny_imagenet_alexnet_bn_aug_s999.json
+==============================================================================================
+Training completed in 870.68s.
+Best Val Accuracy: 33.07% | Best Val Macro F1: 31.75%
+Model Complexity : 6.806M Parameters | 438.36M FLOPs
+Best model weights saved to: checkpoints/tiny_imagenet_alexnet_bn_aug_s999.pth
+Training curves successfully saved to: plots/tiny_imagenet_alexnet_bn_aug_s999.png

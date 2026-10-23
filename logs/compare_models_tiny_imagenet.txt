@@ -1,0 +1,12 @@
+Device: cuda | Dataset: tiny_imagenet | Batch size: 1
+Model | Params (M) | MACs/image (M) | FLOPs/image (M) | Batch latency (ms) | Images/s
+LeNet-5 | 0.354636 | 3.602 | 7.204 | 0.4038 | 2476.2
+Modernized LeNet | 0.462156 | 4.608 | 9.217 | 0.4368 | 2289.4
+AlexNet, no normalization | 6.803592 | 218.542 | 437.084 | 1.1585 | 863.2
+AlexNet + LRN | 6.803592 | 218.542 | 437.084 | 1.4853 | 673.3
+AlexNet + BatchNorm | 6.806152 | 219.178 | 438.355 | 1.1792 | 848.0
+AlexNet + BN + augmentation | 6.806152 | 219.178 | 438.355 | 1.3020 | 768.0
+PyTorch Zoo AlexNet | 57.823240 | 94.878 | 189.755 | 2.2994 | 434.9
+Saved results/profile_tiny_imagenet.json
+Augmentation is a training transform, so rows 5 and 6 have the same inference architecture.
+FLOPs are profiler estimates; LRN, activations and other operators may be uncounted.

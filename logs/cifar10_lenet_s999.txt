@@ -1,0 +1,70 @@
+========================================================================================
+ELEC 475: Lab 2 Training Engine
+Device        : cuda (NVIDIA GeForce RTX 3050 Laptop GPU)
+Model         : LENET (Norm: N/A)
+Dataset       : CIFAR10 (Augmentation: False)
+Hyperparams   : Epochs=5, BatchSize=128, LR=0.001, Seed=999
+Early Stopping: Disabled
+========================================================================================
+
+Initializing DataLoaders...
+Train batches: 390 (50000 samples), Val batches: 79, Classes: 10
+============================================================
+Computational Complexity Profile: LENET (none)
+Input Tensor Shape   : (1, 3, 64, 64)
+Counting Method      : THOP (FLOPs = 2 x reported MACs; some operators are uncounted)
+------------------------------------------------------------
+Total Parameters     : 338,486 (0.3385 M)
+Trainable Parameters : 338,486
+Multiply-Accumulates : 3,585,904 (3.59 MMACs)
+Floating Point Ops   : 7,171,808 (7.17 MFLOPs)
+Weight Size (FP32)   : 1.29 MB
+============================================================
+
+Detailed Layer Specification:
+==========================================================================================
+Layer (type:depth-idx)                   Output Shape              Param #
+==========================================================================================
+LeNet5                                   [1, 10]                   --
+├─Sequential: 1-1                        [1, 16, 13, 13]           --
+│    └─Conv2d: 2-1                       [1, 6, 60, 60]            456
+│    └─Tanh: 2-2                         [1, 6, 60, 60]            --
+│    └─AvgPool2d: 2-3                    [1, 6, 30, 30]            --
+│    └─Conv2d: 2-4                       [1, 16, 26, 26]           2,416
+│    └─Tanh: 2-5                         [1, 16, 26, 26]           --
+│    └─AvgPool2d: 2-6                    [1, 16, 13, 13]           --
+├─Sequential: 1-2                        [1, 10]                   --
+│    └─Linear: 2-7                       [1, 120]                  324,600
+│    └─Tanh: 2-8                         [1, 120]                  --
+│    └─Linear: 2-9                       [1, 84]                   10,164
+│    └─Tanh: 2-10                        [1, 84]                   --
+│    └─Linear: 2-11                      [1, 10]                   850
+==========================================================================================
+Total params: 338,486
+Trainable params: 338,486
+Non-trainable params: 0
+Total mult-adds (Units.MEGABYTES): 3.61
+==========================================================================================
+Input size (MB): 0.05
+Forward/backward pass size (MB): 0.26
+Params size (MB): 1.35
+Estimated Total Size (MB): 1.66
+==========================================================================================
+
+==============================================================================================
+ Epoch  | Train Loss  | Train Acc (%)  |  Val Loss  | Val Acc (%)  | Val F1 (%)  | Time (s)  | Throughput
+----------------------------------------------------------------------------------------------
+   1    |   1.6803    |     40.57      |   1.5051   |    47.16     |    47.09    |   14.52   |  3437.2  s/s
+   2    |   1.4458    |     48.41      |   1.4355   |    48.37     |    48.07    |   12.13   |  4114.5  s/s
+   3    |   1.3522    |     51.79      |   1.3725   |    51.00     |    50.67    |   11.95   |  4176.4  s/s
+   4    |   1.2794    |     54.32      |   1.3705   |    51.33     |    51.11    |   13.04   |  3827.9  s/s
+   5    |   1.2131    |     56.88      |   1.3468   |    51.86     |    51.75    |   11.75   |  4246.7  s/s
+Final clean-train accuracy: 59.72% | Final validation: 51.86%
+Generalization gap (clean training - validation): 7.86 percentage points
+Results and per-epoch history saved to: results/cifar10_lenet_s999.json
+==============================================================================================
+Training completed in 63.44s.
+Best Val Accuracy: 51.86% | Best Val Macro F1: 51.75%
+Model Complexity : 0.338M Parameters | 7.17M FLOPs
+Best model weights saved to: checkpoints/cifar10_lenet_s999.pth
+Training curves successfully saved to: plots/cifar10_lenet_s999.png

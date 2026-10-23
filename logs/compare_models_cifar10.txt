@@ -1,0 +1,12 @@
+Device: cuda | Dataset: cifar10 | Batch size: 1
+Model | Params (M) | MACs/image (M) | FLOPs/image (M) | Batch latency (ms) | Images/s
+LeNet-5 | 0.338486 | 3.586 | 7.172 | 0.4557 | 2194.4
+Modernized LeNet | 0.446006 | 4.593 | 9.185 | 0.5250 | 1904.9
+AlexNet, no normalization | 6.608842 | 218.348 | 436.695 | 1.1260 | 888.1
+AlexNet + LRN | 6.608842 | 218.348 | 436.695 | 1.4956 | 668.6
+AlexNet + BatchNorm | 6.611402 | 218.983 | 437.966 | 1.1575 | 863.9
+AlexNet + BN + augmentation | 6.611402 | 218.983 | 437.966 | 1.1855 | 843.5
+PyTorch Zoo AlexNet | 57.044810 | 94.099 | 188.199 | 2.2456 | 445.3
+Saved results/profile_cifar10.json
+Augmentation is a training transform, so rows 5 and 6 have the same inference architecture.
+FLOPs are profiler estimates; LRN, activations and other operators may be uncounted.
